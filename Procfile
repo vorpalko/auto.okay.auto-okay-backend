@@ -1,0 +1,1 @@
+web: ./build/install/auto.okay.auto-okay-backend/bin/auto.okay.auto-okay-backend
