@@ -19,16 +19,17 @@ data class Test(
 
 fun Application.configureRouting() {
     routing {
+        get("/") {
+            call.respondText("test")
+        }
         post("/login") {
             val receive = call.receive(LoginRemoteReceiveDto::class)
             val loginSucceed = InMemoryCache.userList.firstOrNull { it.login == receive.login && it.password == receive.password }
             call.respond(LoginRemoteResponseDto(loginSucceed != null))
-            return@post
         }
         post("/createOrder") {
             val receive = call.receive(CreateRequest::class)
             CreateLogic.create(receive)
-            return@post
         }
         get("/orderList") {
             call.respond(OrderListLogic.getOrderList())
