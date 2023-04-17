@@ -38,6 +38,11 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
 
-tasks.create("stage") {
-    dependsOn("installDist")
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "auto.okay.ApplicationKt"
+    }
+    configurations["compileClasspath"].forEach { file: File ->
+        from(zipTree(file.absoluteFile))
+    }
 }
