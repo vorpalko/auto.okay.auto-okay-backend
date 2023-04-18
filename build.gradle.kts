@@ -39,6 +39,9 @@ dependencies {
 }
 
 tasks.jar {
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
     manifest {
         attributes["Main-Class"] = "auto.okay.ApplicationKt"
     }
