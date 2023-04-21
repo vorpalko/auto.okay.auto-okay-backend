@@ -16,7 +16,7 @@ fun main() {
 
 fun Application.module() {
     install(DefaultHeaders) {
-        header("Access-Control-Allow-Origin", "'*'")
+        header("Access-Control-Allow-Origin", "*")
     }
     configureRouting()
     configureSerialization()
