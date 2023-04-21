@@ -32,6 +32,7 @@ fun Application.configureRouting() {
             CreateLogic.create(receive)
         }
         get("/orderList") {
+            //No 'Access-Control-Allow-Origin' header is present on the requested resource.
             call.respond(OrderListLogic.getOrderList())
         }
     }
