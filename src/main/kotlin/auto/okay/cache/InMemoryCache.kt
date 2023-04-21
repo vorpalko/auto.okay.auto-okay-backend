@@ -6,7 +6,8 @@ object InMemoryCache {
 
     val userList: ArrayList<RegisterReceiveDto> = arrayListOf(
         RegisterReceiveDto("jenya", "12345"),
-        RegisterReceiveDto("artem", "12345")
+        RegisterReceiveDto("artem", "12345"),
+        RegisterReceiveDto("kirill", "12345"),
     )
 
 }
