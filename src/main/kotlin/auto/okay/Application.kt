@@ -6,7 +6,9 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.cio.*
 import auto.okay.plugins.*
+import io.ktor.http.*
 import io.ktor.server.netty.*
+import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.defaultheaders.*
 
 fun main() {
@@ -15,11 +17,17 @@ fun main() {
 }
 
 fun Application.module() {
-    install(DefaultHeaders) {
+    install(CORS) {
+        allowHeader(HttpHeaders.ContentType)
+        allowHeader(HttpHeaders.AccessControlAllowOrigin)
+        allowHeader(HttpHeaders.AccessControlAllowHeaders)
+        allowHeader(HttpHeaders.AccessControlAllowMethods)
+    }
+/*    install(DefaultHeaders) {
         header("Access-Control-Allow-Origin", "*")
         header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS")
         header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
-    }
+    }*/
     configureRouting()
     configureSerialization()
 }
