@@ -22,12 +22,22 @@ fun Application.module() {
         allowHeader(HttpHeaders.AccessControlAllowOrigin)
         allowHeader(HttpHeaders.AccessControlAllowHeaders)
         allowHeader(HttpHeaders.AccessControlAllowMethods)
+
+        allowHost("client-host")
+        allowHost("client-host:8080")
+        allowHost("client-host", subDomains = listOf("en", "de", "es", "ru"))
+        allowHost("client-host", schemes = listOf("http", "https"))
+
+        allowMethod(HttpMethod.Options)
+        allowMethod(HttpMethod.Put)
+        allowMethod(HttpMethod.Patch)
+        allowMethod(HttpMethod.Delete)
     }
-/*    install(DefaultHeaders) {
+    install(DefaultHeaders) {
         header("Access-Control-Allow-Origin", "*")
         header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS")
         header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
-    }*/
+    }
     configureRouting()
     configureSerialization()
 }
