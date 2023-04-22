@@ -19,14 +19,11 @@ fun main() {
 fun Application.module() {
     install(CORS) {
         allowHeader(HttpHeaders.ContentType)
-        allowHeader(HttpHeaders.AccessControlAllowOrigin)
-        allowHeader(HttpHeaders.AccessControlAllowHeaders)
-        allowHeader(HttpHeaders.AccessControlAllowMethods)
+        allowHeader(HttpHeaders.Authorization)
 
-        allowHost("client-host")
-        allowHost("client-host:8080")
-        allowHost("client-host", subDomains = listOf("en", "de", "es", "ru"))
-        allowHost("client-host", schemes = listOf("http", "https"))
+        allowHeadersPrefixed("custom-")
+
+        anyHost()
 
         allowMethod(HttpMethod.Options)
         allowMethod(HttpMethod.Put)
