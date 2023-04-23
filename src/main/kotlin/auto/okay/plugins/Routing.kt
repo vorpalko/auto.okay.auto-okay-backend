@@ -29,7 +29,8 @@ fun Application.configureRouting() {
         }
         post("/createOrder") {
             val receive = call.receive(CreateRequest::class)
-            CreateLogic.create(receive)
+            val success = CreateLogic.create(receive)
+            call.respond(LoginRemoteResponseDto(success))
         }
         get("/orderList") {
             //No 'Access-Control-Allow-Origin' header is present on the requested resource.
