@@ -1,40 +1,35 @@
 package auto.okay.plugins
 
-import auto.okay.cache.InMemoryCache
-import auto.okay.features.orders.ordercreate.CreateLogic
-import auto.okay.features.orders.ordercreate.CreateRequest
-import auto.okay.features.login.LoginRemoteReceiveDto
-import auto.okay.features.login.LoginRemoteResponseDto
-import auto.okay.features.orders.orderlist.OrderListLogic
+import auto.okay.features.login.LoginController
+import auto.okay.features.orders.ordercreate.CreateOrderController
+import auto.okay.features.login.dto.LoginRequest
+import auto.okay.features.orders.ordercreate.CreateOrderRequest
+import auto.okay.features.orders.orderlist.OrderListController
 import io.ktor.server.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class Test(
-    val text: String
-)
 
 fun Application.configureRouting() {
     routing {
         get("/") {
-            call.respondText("test")
+            call.respondText("Auto-Okay server launched")
         }
         post("/login") {
-            val receive = call.receive(LoginRemoteReceiveDto::class)
-            val loginSucceed = InMemoryCache.userList.firstOrNull { it.login == receive.login && it.password == receive.password }
-            call.respond(LoginRemoteResponseDto(loginSucceed != null))
+            val request = call.receive(LoginRequest::class)
+            val response = LoginController.proceedUserLogin(request)
+            call.respond(response)
         }
         post("/createOrder") {
-            val receive = call.receive(CreateRequest::class)
-            val success = CreateLogic.create(receive)
-            call.respond(LoginRemoteResponseDto(success))
+            val request = call.receive(CreateOrderRequest::class)
+            val response = CreateOrderController.create(request)
+            call.respond(response)
         }
         get("/orderList") {
-            //No 'Access-Control-Allow-Origin' header is present on the requested resource.
-            call.respond(OrderListLogic.getOrderList())
+            val response = OrderListController.getOrderList()
+            call.respond(response)
         }
     }
 }
+
+

@@ -1,9 +1,12 @@
 package auto.okay.features.orders.orderlist
 
-import auto.okay.features.orders.ordercreate.CreateRequest
+import auto.okay.features.orders.OrderDto
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class OrderListResponse(
-    val orders: List<CreateRequest>
+    val orders: List<OrderDto>
 )
+
+
+

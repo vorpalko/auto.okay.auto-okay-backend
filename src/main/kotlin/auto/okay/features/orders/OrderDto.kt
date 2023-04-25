@@ -1,9 +1,9 @@
-package auto.okay.features.orders.ordercreate
+package auto.okay.features.orders
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreateRequest(
+data class OrderDto(
     val customerName: String?,
     val customerPhone: String?,
     val carName: String?,
@@ -12,3 +12,6 @@ data class CreateRequest(
     val problem: String?,
     val price: String?
 )
+
+
+

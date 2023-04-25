@@ -1,7 +1,6 @@
 package auto.okay
 
 import auto.okay.features.login.configureLoginRouting
-import auto.okay.features.register.configureRegisterRouting
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.cio.*
@@ -17,24 +16,8 @@ fun main() {
 }
 
 fun Application.module() {
-    install(CORS) {
-        allowHeader(HttpHeaders.ContentType)
-        allowHeader(HttpHeaders.Authorization)
-
-        allowHeadersPrefixed("custom-")
-
-        anyHost()
-
-        allowMethod(HttpMethod.Options)
-        allowMethod(HttpMethod.Put)
-        allowMethod(HttpMethod.Patch)
-        allowMethod(HttpMethod.Delete)
-    }
-    install(DefaultHeaders) {
-        header("Access-Control-Allow-Origin", "*")
-        header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS")
-        header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
-    }
+    configureCORS()
+    configureHeaders()
     configureRouting()
     configureSerialization()
 }
